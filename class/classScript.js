@@ -22,7 +22,7 @@ class Person {
     return 2024 - this.birthday;
   }
 }
-const jiswan = new Person("Muhammed Jiswan", 1989);
+const jiswan = new Person("Muhammed Jiswan", 1999);
 console.log(jiswan.calcuAge());
 console.log(jiswan);
 
