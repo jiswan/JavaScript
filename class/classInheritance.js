@@ -29,6 +29,14 @@ class Student extends Person {
     super(fullName, birthday);
     this.course = course;
   }
+  introduce() {
+    console.log(
+      `Hi My name is ${this._fullName}  and  I enrolled in ${this.course}`
+    );
+  }
+  calcuAge() {
+    console.log(`I am ${2024 - this.birthday} year old`);
+  }
 }
 
 const jiswan = new Person("Muhammed Jiswan", 1999);
@@ -38,3 +46,5 @@ console.log(jiswan);
 //child class obj
 const st = new Student("Anas Rahman", 1975, "ec");
 console.log(st);
+st.introduce();
+st.calcuAge();
