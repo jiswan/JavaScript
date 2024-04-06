@@ -4,6 +4,7 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
+/*
 const getCountryInfo = function (country) {
   const request = new XMLHttpRequest();
   request.open('GET', `https://restcountries.com/v3.1/name/${country}`);
@@ -36,3 +37,43 @@ const getCountryInfo = function (country) {
 getCountryInfo('portugal');
 getCountryInfo('usa');
 getCountryInfo('India');
+*/
+//function for html
+const renderCountry = function (data) {
+  let language = Object.values(data.languages)[0];
+  let currency = Object.values(data.currencies)[0];
+  const html = `
+  <article class="country">
+          <img class="country__img" src="${data.flags.png}" />
+          <div class="country__data">
+            <h3 class="country__name">${data.name.common}</h3>
+            <h5 class="country__region">${data.region}</h5>
+            <p class="country__row"><span>👫</span>${data.population}people</p>
+            <p class="country__row"><span>🗣️</span>${language}</p>
+            <p class="country__row"><span>💰</span>${currency.name}</p>
+          </div>
+        </article>
+  `;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
+};
+
+//Using Fetch (promise)
+const getCountryInfo = function (country) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then(data => {
+      const countryData = data.find(
+        item => item.name.common.toUpperCase() === country.toUpperCase()
+      );
+      if (countryData) {
+        renderCountry(countryData);
+      } else {
+        console.log('Country not found');
+      }
+    });
+};
+//getCountryInfo('portugal');
+getCountryInfo('spain');
+getCountryInfo('India');
+getCountryInfo('china');
